@@ -8,6 +8,7 @@ use futures::{
     Future,
 };
 use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
+use crate::webapi::authentication::Claims;
 
 pub struct BearerAuthentication;
 
@@ -105,10 +106,3 @@ fn skip_authentication(path: &str) -> bool {
 }
 
 pub const IGNORE_ROUTES: [&str; 1] = ["/api/v1/authenticate"];
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Claims {
-    sub: String,
-    name: String,
-    iat: u64,
-}
