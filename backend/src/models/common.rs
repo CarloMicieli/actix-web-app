@@ -25,7 +25,7 @@ impl Address {
             city,
             region,
             country,
-            postal_code
+            postal_code,
         }
     }
 }

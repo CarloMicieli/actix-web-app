@@ -23,23 +23,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82d30b50-0990-45e9-a5d9-b9c0d44b02d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/riderModule.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/common.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webapi/brands_controller.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webapi/health_controller.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webapi/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webapi/pagination.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/webapi/authentication.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/webapi/middleware.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/webapi.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/brands.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/common.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/common.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webapi/brands_controller.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/webapi/brands_controller.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webapi/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/webapi/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webapi/pagination.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/webapi/pagination.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,17 +57,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/webapi.rs" />
         <option value="$PROJECT_DIR$/src/webapi/health_controller.rs" />
-        <option value="$PROJECT_DIR$/Cargo.toml" />
         <option value="$PROJECT_DIR$/src/models/mod.rs" />
         <option value="$PROJECT_DIR$/src/models/common.rs" />
         <option value="$PROJECT_DIR$/src/models/brands.rs" />
-        <option value="$PROJECT_DIR$/src/main.rs" />
-        <option value="$PROJECT_DIR$/src/webapi/mod.rs" />
         <option value="$PROJECT_DIR$/src/webapi/pagination.rs" />
         <option value="$PROJECT_DIR$/src/webapi/brands_controller.rs" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/webapi/mod.rs" />
+        <option value="$PROJECT_DIR$/Cargo.toml" />
+        <option value="$PROJECT_DIR$/src/webapi/authentication.rs" />
+        <option value="$PROJECT_DIR$/src/main.rs" />
+        <option value="$PROJECT_DIR$/src/webapi/middleware.rs" />
       </list>
     </option>
   </component>
@@ -98,6 +95,7 @@
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="version" value="2" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -107,7 +105,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598195479254</updated>
-      <workItem from="1598195484116" duration="4723000" />
+      <workItem from="1598195484116" duration="10599000" />
+      <workItem from="1598243512671" duration="2836000" />
     </task>
     <servers />
   </component>
@@ -127,6 +126,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

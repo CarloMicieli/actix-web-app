@@ -1,13 +1,11 @@
-use actix_web::{web, HttpResponse, Responder};
 use crate::models::brands::Brand;
 use crate::models::common::Address;
 use crate::webapi::pagination::PaginatedResults;
+use actix_web::{web, HttpResponse, Responder};
 
 pub async fn get_all_brands() -> impl Responder {
-
-    let brands = PaginatedResults::new(
-        vec![fake_brand(), fake_brand(), fake_brand()]
-    );
+    let brands =
+        PaginatedResults::new(vec![fake_brand(), fake_brand(), fake_brand()]);
 
     HttpResponse::Ok().json(brands)
 }
@@ -38,7 +36,7 @@ fn fake_brand() -> Brand {
             String::from("London"),
             None,
             String::from("UK"),
-            String::from("12345")
+            String::from("12345"),
         )),
         None,
         None,

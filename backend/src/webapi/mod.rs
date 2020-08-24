@@ -1,6 +1,8 @@
-mod pagination;
+pub mod middleware;
+pub mod authentication;
 mod brands_controller;
 mod health_controller;
+mod pagination;
 
 use actix_web::web;
 
@@ -8,6 +10,10 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
     #[rustfmt::skip]
     cfg.service(
         web::scope("/api/v1")
+            .service(
+                web::resource("/authenticate")
+                    .route(web::post().to(authentication::user_login))
+            )
             .service(
                 web::resource("/health_check")
                     .route(web::get().to(health_controller::health_check))

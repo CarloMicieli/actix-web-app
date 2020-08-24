@@ -5,12 +5,12 @@ pub struct PaginatedResults<T: serde::Serialize> {
     results: Vec<T>,
 }
 
-impl <T: serde::Serialize> PaginatedResults<T> {
+impl<T: serde::Serialize> PaginatedResults<T> {
     pub fn new(results: Vec<T>) -> Self {
         PaginatedResults {
             links: Links::one_page("http://localhost:5000/api/"),
             limit: 10,
-            results
+            results,
         }
     }
 }

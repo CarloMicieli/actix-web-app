@@ -5,8 +5,6 @@ mod webapi;
 extern crate log;
 #[macro_use]
 extern crate serde_derive;
-#[macro_use]
-extern crate serde_json;
 
 use dotenv::dotenv;
 use env_logger::Env;
@@ -43,6 +41,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
+            .wrap( crate::webapi::middleware::BearerAuthentication)
             .configure(webapi::config_services)
     })
     .bind(bind_address)?
