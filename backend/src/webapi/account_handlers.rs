@@ -14,7 +14,7 @@ pub struct Authentication {
     token: String,
 }
 
-pub async fn user_login(user: web::Json<Login>) -> impl Responder {
+pub async fn authenticate(user: web::Json<Login>) -> impl Responder {
     debug!("User {} tried to login", user.username);
 
     let secret_key =

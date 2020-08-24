@@ -1,6 +1,6 @@
-pub mod authentication;
-mod brands_controller;
-mod health_controller;
+mod account_handlers;
+mod brand_handlers;
+mod health_handlers;
 mod pagination;
 
 use actix_web::web;
@@ -11,22 +11,22 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
         web::scope("/api/v1")
             .service(
                 web::resource("/authenticate")
-                    .route(web::post().to(authentication::user_login))
+                    .route(web::post().to(account_handlers::authenticate))
             )
             .service(
                 web::resource("/health_check")
-                    .route(web::get().to(health_controller::health_check))
+                    .route(web::get().to(health_handlers::health_check))
             )
             .service(
                 web::scope("/brands")
                     .service(
                     web::resource("")
-                        .route(web::get().to(brands_controller::get_all_brands))
-                        .route(web::post().to(brands_controller::post_new_brand))
+                        .route(web::get().to(brand_handlers::get_all_brands))
+                        .route(web::post().to(brand_handlers::post_new_brand))
                     )
                     .service(
                         web::resource("/{brand}")
-                            .route(web::get().to(brands_controller::get_brand))
+                            .route(web::get().to(brand_handlers::get_brand))
                 )
             )
     );
