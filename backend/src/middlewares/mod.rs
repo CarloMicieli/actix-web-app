@@ -1,22 +1,28 @@
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
+use crate::tokens::Claims;
 use actix_service::{Service, Transform};
-use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error, HttpResponse};
+use actix_web::{
+    dev::ServiceRequest, dev::ServiceResponse, Error, HttpResponse,
+};
 use futures::{
     future::{ok, Ready},
     Future,
 };
-use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
-use crate::webapi::authentication::Claims;
+use jsonwebtoken::{decode, Algorithm, DecodingKey, Validation};
 
 pub struct BearerAuthentication;
 
 impl<S, B> Transform<S> for BearerAuthentication
-    where
-        S: Service<Request = ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
-        S::Future: 'static,
-        B: 'static,
+where
+    S: Service<
+        Request = ServiceRequest,
+        Response = ServiceResponse<B>,
+        Error = Error,
+    >,
+    S::Future: 'static,
+    B: 'static,
 {
     type Request = ServiceRequest;
     type Response = ServiceResponse<B>;
@@ -35,17 +41,25 @@ pub struct BearerAuthenticationMiddleware<S> {
 }
 
 impl<S, B> Service for BearerAuthenticationMiddleware<S>
-    where
-        S: Service<Request = ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
-        S::Future: 'static,
-        B: 'static,
+where
+    S: Service<
+        Request = ServiceRequest,
+        Response = ServiceResponse<B>,
+        Error = Error,
+    >,
+    S::Future: 'static,
+    B: 'static,
 {
     type Request = ServiceRequest;
     type Response = ServiceResponse<B>;
     type Error = Error;
-    type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
+    type Future =
+        Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
 
-    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+    fn poll_ready(
+        &mut self,
+        cx: &mut Context<'_>,
+    ) -> Poll<Result<(), Self::Error>> {
         self.service.poll_ready(cx)
     }
 
@@ -60,11 +74,13 @@ impl<S, B> Service for BearerAuthenticationMiddleware<S>
 
             if let Some(auth_header) = headers.get("AUTHORIZATION") {
                 if let Ok(auth_str) = auth_header.to_str() {
-                    if auth_str.starts_with("bearer") || auth_str.starts_with("Bearer") {
+                    if auth_str.starts_with("bearer")
+                        || auth_str.starts_with("Bearer")
+                    {
                         let token = auth_str[6..auth_str.len()].trim();
 
-                        let secret_key =
-                            std::env::var("SECRET_KEY").expect("Unable to find a SECRET_KEY");
+                        let secret_key = std::env::var("SECRET_KEY")
+                            .expect("Unable to find a SECRET_KEY");
 
                         let token_message = decode::<Claims>(
                             &token,
@@ -88,7 +104,7 @@ impl<S, B> Service for BearerAuthenticationMiddleware<S>
         } else {
             Box::pin(async move {
                 Ok(req.into_response(
-                    HttpResponse::Unauthorized().json("").into_body()
+                    HttpResponse::Unauthorized().json("").into_body(),
                 ))
             })
         }

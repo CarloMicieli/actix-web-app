@@ -1,4 +1,6 @@
+mod middlewares;
 mod models;
+mod tokens;
 mod webapi;
 
 #[macro_use]
@@ -41,7 +43,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
-            .wrap( crate::webapi::middleware::BearerAuthentication)
+            .wrap(crate::middlewares::BearerAuthentication)
             .configure(webapi::config_services)
     })
     .bind(bind_address)?

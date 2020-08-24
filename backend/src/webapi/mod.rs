@@ -1,4 +1,3 @@
-pub mod middleware;
 pub mod authentication;
 mod brands_controller;
 mod health_controller;
