@@ -3,7 +3,6 @@ use chrono::{DateTime, Timelike, Utc};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
     sub: String,
-    name: String,
     #[serde(with = "jwt_numeric_date")]
     iat: DateTime<Utc>,
     #[serde(with = "jwt_numeric_date")]
@@ -11,7 +10,7 @@ pub struct Claims {
 }
 
 impl Claims {
-    pub fn new(name: &str, iat: DateTime<Utc>, exp: DateTime<Utc>) -> Self {
+    pub fn new(sub: &str, iat: DateTime<Utc>, exp: DateTime<Utc>) -> Self {
         // normalize the timestamps by stripping of microseconds
         let iat =
             iat.date()
@@ -20,8 +19,7 @@ impl Claims {
             exp.date()
                 .and_hms_milli(exp.hour(), exp.minute(), exp.second(), 0);
         Self {
-            name: name.to_owned(),
-            sub: "12345678".to_owned(),
+            sub: sub.to_owned(),
             iat,
             exp,
         }
