@@ -1,4 +1,4 @@
-use crate::models::common::Address;
+use super::common::Address;
 
 #[derive(Debug, Serialize)]
 pub struct Brand {

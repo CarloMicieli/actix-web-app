@@ -1,7 +1,9 @@
-mod account_handlers;
-mod brand_handlers;
-mod health_handlers;
-mod pagination;
+mod handlers;
+pub mod middleware;
+mod responses;
+mod tokens;
+
+use handlers::{account_handlers, brand_handlers, health_handlers};
 
 use actix_web::web;
 

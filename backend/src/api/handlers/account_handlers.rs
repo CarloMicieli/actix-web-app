@@ -1,4 +1,4 @@
-use crate::tokens::Claims;
+use crate::api::tokens::Claims;
 use actix_web::{web, HttpResponse, Responder};
 use chrono::{Duration, Utc};
 use jsonwebtoken::{encode, EncodingKey, Header};

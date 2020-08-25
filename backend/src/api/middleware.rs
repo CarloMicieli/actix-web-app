@@ -1,7 +1,7 @@
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-use crate::tokens::Claims;
+use crate::api::tokens::Claims;
 use actix_service::{Service, Transform};
 use actix_web::{
     dev::ServiceRequest, dev::ServiceResponse, Error, HttpResponse,

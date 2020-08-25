@@ -1,6 +1,7 @@
-use crate::models::brands::Brand;
-use crate::models::common::Address;
-use crate::webapi::pagination::PaginatedResults;
+use crate::api::responses::pagination::PaginatedResults;
+use crate::domain::brands::Brand;
+use crate::domain::common::Address;
+
 use actix_web::{web, HttpResponse, Responder};
 
 pub async fn get_all_brands() -> impl Responder {
