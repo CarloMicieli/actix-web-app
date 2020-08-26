@@ -18,6 +18,8 @@ use actix_web::middleware::Compress;
 use actix_web::middleware::Logger;
 use actix_web::{http, App, HttpServer};
 
+use crate::db::DbContext;
+
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     dotenv().expect("Failed to read .env file");
@@ -26,6 +28,8 @@ async fn main() -> std::io::Result<()> {
     let app_host = env::var("APP_HOST").unwrap_or("0.0.0.0".to_owned());
     let port_number = env::var("APP_PORT").unwrap_or("5000".to_owned());
     let bind_address = format!("{}:{}", &app_host, &port_number);
+
+    let db_context = DbContext::new_from_env();
 
     HttpServer::new(move || {
         App::new()
@@ -41,6 +45,7 @@ async fn main() -> std::io::Result<()> {
                     .max_age(3600)
                     .finish(),
             )
+            .data(db_context.clone())
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
