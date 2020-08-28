@@ -50,7 +50,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
-            .wrap(api::middleware::BearerAuthentication)
+           // .wrap(api::middleware::BearerAuthentication)
             .configure(api::config_services)
     })
     .bind(bind_address)?

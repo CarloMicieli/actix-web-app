@@ -35,3 +35,13 @@ impl Brand {
         }
     }
 }
+
+#[derive(Debug)]
+pub enum BrandError {
+    BrandNotFound,
+}
+
+
+
+
+
