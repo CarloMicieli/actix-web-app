@@ -1,3 +1,9 @@
+#[derive(Debug, Deserialize)]
+pub struct PaginateQuery {
+    start: Option<usize>,
+    limit: Option<usize>,
+}
+
 #[derive(Debug, Serialize)]
 pub struct PaginatedResults<T: serde::Serialize> {
     links: Links,
