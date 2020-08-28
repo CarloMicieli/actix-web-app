@@ -16,7 +16,7 @@ use std::env;
 use actix_cors::Cors;
 use actix_web::middleware::Compress;
 use actix_web::middleware::Logger;
-use actix_web::{http, App, HttpServer};
+use actix_web::{http, web, App, HttpServer};
 
 use crate::db::DbContext;
 
@@ -46,6 +46,7 @@ async fn main() -> std::io::Result<()> {
                     .finish(),
             )
             .data(db_context.clone())
+            .data(web::JsonConfig::default().limit(4096))
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
