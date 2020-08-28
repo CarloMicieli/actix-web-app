@@ -17,8 +17,7 @@ pub struct Authentication {
 pub async fn authenticate(user: web::Json<Login>) -> impl Responder {
     debug!("User {} tried to login", user.username);
 
-    let secret_key =
-        std::env::var("SECRET_KEY").expect("Unable to find a SECRET_KEY");
+    let secret_key = std::env::var("SECRET_KEY").expect("Unable to find a SECRET_KEY");
 
     let iat = Utc::now();
     let exp = iat + Duration::minutes(30);

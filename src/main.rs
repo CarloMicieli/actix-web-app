@@ -37,10 +37,7 @@ async fn main() -> std::io::Result<()> {
                 Cors::new()
                     .send_wildcard()
                     .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
-                    .allowed_headers(vec![
-                        http::header::AUTHORIZATION,
-                        http::header::ACCEPT,
-                    ])
+                    .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
                     .allowed_header(http::header::CONTENT_TYPE)
                     .max_age(3600)
                     .finish(),
@@ -50,7 +47,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
-           // .wrap(api::middleware::BearerAuthentication)
+            // .wrap(api::middleware::BearerAuthentication)
             .configure(api::config_services)
     })
     .bind(bind_address)?

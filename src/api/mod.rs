@@ -4,11 +4,11 @@ pub mod requests;
 pub mod responses;
 pub mod tokens;
 
-use actix_web::HttpRequest;
 use crate::api::requests::brand_requests::{EditBrandRequest, NewBrandRequest};
+use actix_web::HttpRequest;
 use actix_web::{error, web, FromRequest, HttpResponse};
-use handlers::{account_handlers, health_handlers};
 use handlers::catalog::brand_handlers;
+use handlers::{account_handlers, health_handlers};
 
 pub fn config_services(cfg: &mut web::ServiceConfig) {
     #[rustfmt::skip]
@@ -49,9 +49,7 @@ fn json_error_handler(err: error::JsonPayloadError, _req: &HttpRequest) -> error
 
     let detail = err.to_string();
     let resp = match &err {
-        JsonPayloadError::ContentType => {
-            HttpResponse::UnsupportedMediaType().body(detail)
-        }
+        JsonPayloadError::ContentType => HttpResponse::UnsupportedMediaType().body(detail),
         JsonPayloadError::Deserialize(json_err) if json_err.is_data() => {
             HttpResponse::UnprocessableEntity().body(detail)
         }

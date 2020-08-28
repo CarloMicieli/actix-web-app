@@ -12,12 +12,8 @@ pub struct Claims {
 impl Claims {
     pub fn new(sub: &str, iat: DateTime<Utc>, exp: DateTime<Utc>) -> Self {
         // normalize the timestamps by stripping of microseconds
-        let iat =
-            iat.date()
-                .and_hms_milli(iat.hour(), iat.minute(), iat.second(), 0);
-        let exp =
-            exp.date()
-                .and_hms_milli(exp.hour(), exp.minute(), exp.second(), 0);
+        let iat = iat.date().and_hms_milli(iat.hour(), iat.minute(), iat.second(), 0);
+        let exp = exp.date().and_hms_milli(exp.hour(), exp.minute(), exp.second(), 0);
         Self {
             sub: sub.to_owned(),
             iat,
@@ -32,10 +28,7 @@ mod jwt_numeric_date {
     use serde::{self, Deserialize, Deserializer, Serializer};
 
     /// Serializes a DateTime<Utc> to a Unix timestamp (milliseconds since 1970/1/1T00:00:00T)
-    pub fn serialize<S>(
-        date: &DateTime<Utc>,
-        serializer: S,
-    ) -> Result<S::Ok, S::Error>
+    pub fn serialize<S>(date: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,
     {
@@ -44,16 +37,12 @@ mod jwt_numeric_date {
     }
 
     /// Attempts to deserialize an i64 and use as a Unix timestamp
-    pub fn deserialize<'de, D>(
-        deserializer: D,
-    ) -> Result<DateTime<Utc>, D::Error>
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
     where
         D: Deserializer<'de>,
     {
         Utc.timestamp_opt(i64::deserialize(deserializer)?, 0)
             .single() // If there are multiple or no valid DateTimes from timestamp, return None
-            .ok_or_else(|| {
-                serde::de::Error::custom("invalid Unix timestamp value")
-            })
+            .ok_or_else(|| serde::de::Error::custom("invalid Unix timestamp value"))
     }
 }
