@@ -1,5 +1,4 @@
-# Trenako (Rust backend)
-
+# actix-web sample app
 ## Setup
 
 Rustup is the starting point to setup the Rust toolchain:
