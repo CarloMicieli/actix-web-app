@@ -1,17 +1,15 @@
 mod api;
 mod db;
 mod domain;
+mod config;
 
 #[macro_use]
 extern crate diesel;
 #[macro_use]
-extern crate log;
-#[macro_use]
 extern crate serde_derive;
 
 use dotenv::dotenv;
-use env_logger::Env;
-use std::env;
+use slog::info;
 
 use actix_cors::Cors;
 use actix_web::middleware::Compress;
@@ -19,17 +17,19 @@ use actix_web::middleware::Logger;
 use actix_web::{http, web, App, HttpServer};
 
 use crate::db::DbContext;
+use crate::config::Config;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     dotenv().expect("Failed to read .env file");
-    env_logger::from_env(Env::default().default_filter_or("debug")).init();
 
-    let app_host = env::var("APP_HOST").unwrap_or("0.0.0.0".to_owned());
-    let port_number = env::var("APP_PORT").unwrap_or("5000".to_owned());
-    let bind_address = format!("{}:{}", &app_host, &port_number);
+    let log = Config::configure_log();
+
+    let bind_address = Config::bind_address_from_env();
 
     let db_context = DbContext::new_from_env();
+
+    info!(log, "Starting server at http://{}", bind_address);
 
     HttpServer::new(move || {
         App::new()
@@ -53,4 +53,9 @@ async fn main() -> std::io::Result<()> {
     .bind(bind_address)?
     .run()
     .await
+}
+
+pub struct AppState {
+    db_context: DbContext,
+    log: Logger,
 }

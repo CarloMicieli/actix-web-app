@@ -71,7 +71,6 @@ where
                             &Validation::new(Algorithm::HS256),
                         );
 
-                        debug!("{:#?}", token_message);
                         authenticated = true;
                     }
                 }
