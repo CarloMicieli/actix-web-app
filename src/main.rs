@@ -7,6 +7,8 @@ mod config;
 extern crate diesel;
 #[macro_use]
 extern crate serde_derive;
+#[macro_use]
+extern crate log;
 
 use dotenv::dotenv;
 use slog::info;
@@ -47,7 +49,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Compress::default())
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
-            // .wrap(api::middleware::BearerAuthentication)
+            .wrap(api::middleware::BearerAuthentication)
             .configure(api::config_services)
     })
     .bind(bind_address)?

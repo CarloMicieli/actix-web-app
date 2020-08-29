@@ -9,7 +9,7 @@ pub async fn get_all_brands(
     paginate_params: web::Query<PaginateQuery>,
     _state: web::Data<AppState>,
 ) -> impl Responder {
-    //debug!(state.log, "{:?}", paginate_params);
+    debug!("{:?}", paginate_params);
     HttpResponse::Ok()
 }
 

@@ -3,7 +3,6 @@ use crate::api::tokens::Claims;
 use actix_web::{web, HttpResponse, Responder};
 use chrono::{Duration, Utc};
 use jsonwebtoken::{encode, EncodingKey, Header};
-//use slog::debug;
 
 #[derive(Debug, Deserialize)]
 pub struct Login {
@@ -17,7 +16,7 @@ pub struct Authentication {
 }
 
 pub async fn authenticate(user: web::Json<Login>, _state: web::Data<AppState>) -> impl Responder {
-    //debug!(state.log, "User {} tried to login", user.username);
+    debug!("User {} tried to login", user.username);
 
     let secret_key = std::env::var("SECRET_KEY").expect("Unable to find a SECRET_KEY");
 
