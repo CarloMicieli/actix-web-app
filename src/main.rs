@@ -36,13 +36,12 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(
-                Cors::new()
+                Cors::default()
                     .send_wildcard()
                     .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
                     .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
                     .allowed_header(http::header::CONTENT_TYPE)
                     .max_age(3600)
-                    .finish(),
             )
             .data(db_context.clone())
             .data(web::JsonConfig::default().limit(4096))
