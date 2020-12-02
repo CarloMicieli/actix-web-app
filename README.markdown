@@ -1,4 +1,10 @@
 # actix-web sample app
+
+## Requirements
+
+* `Rust` 1.48
+* `Cargo`
+
 ## Setup
 
 Rustup is the starting point to setup the Rust toolchain:
